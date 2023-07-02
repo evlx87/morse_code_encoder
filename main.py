@@ -1,6 +1,10 @@
 """
 Программа помощник для изучения азбуки морзе
 """
+import random
+
+answers = []
+words = ["code", "bit", "list", "soul", "next"]
 
 
 def morse_encode(word):
@@ -24,5 +28,19 @@ def morse_encode(word):
 
     return ' '.join(encoded)
 
+
+def get_word(words_list):
+    """Выбираем случайное слово из списка"""
+    random_word = random.choice(words_list)
+
+    return random_word
+
+
+# def print_statistics(answers):
+
+
+print('''Сегодня мы потренируемся расшифровывать морзянку.
+Нажмите Enter и начнем
+''')
 
 print(morse_encode("test"))
