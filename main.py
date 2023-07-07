@@ -3,8 +3,9 @@
 """
 import random
 
-answers = []
-words = ["code", "bit", "list", "soul", "next"]
+ANSWERS = []
+WORDS = ["code", "bit", "list", "soul", "next"]
+COUNT = 0
 
 
 def morse_encode(word):
@@ -36,11 +37,39 @@ def get_word(words_list):
     return random_word
 
 
-# def print_statistics(answers):
+def print_statistics(answers_list):
+    """Вывод статистики верных/неверных ответов"""
+    count_correct = answers_list.count(True)
+    count_incorrect = answers_list.count(False)
+    print(f'''
+    Отвечено верно: {count_correct}
+    Отвечено неверно: {count_incorrect}
+    ''')
 
 
-print('''Сегодня мы потренируемся расшифровывать морзянку.
-Нажмите Enter и начнем
-''')
+def question():
+    """Вывод вопроса и получение ответа"""
+    word = get_word(WORDS)
+    print(f"Угадай что загадано -  {morse_encode(word)}")
+    answer = input("Мой ответ: ")
+    if answer == word:
+        print("Ответ верный!!!")
+        ANSWERS.append(True)
+    else:
+        print(f"Вы ошиблись. Верный ответ: {word}")
+        ANSWERS.append(False)
 
-print(morse_encode("test"))
+
+print("Сегодня мы потренируемся расшифровывать морзянку.")
+
+start_command = input("Нажмите Enter и начнем")
+
+if start_command == "":
+    while COUNT < 5:
+        question()
+        COUNT += 1
+
+    if COUNT == 5:
+        print_statistics(ANSWERS)
+else:
+    print("Упс. Что-то пошло не так.")
