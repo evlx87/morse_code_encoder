@@ -51,7 +51,7 @@ def question():
     """Вывод вопроса и получение ответа"""
     word = get_word(WORDS)
     print(f"Угадай что загадано -  {morse_encode(word, CODE_DICTIONARY)}")
-    answer = input("Мой ответ: ")
+    answer = input("Мой ответ: ").lower()
     if answer == word:
         print("Ответ верный!!!")
         answers.append(True)
