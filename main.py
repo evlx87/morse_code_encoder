@@ -3,29 +3,29 @@
 """
 import random
 
-ANSWERS = []
+CODE_DICTIONARY = {
+    "0": "-----", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
+    "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.", "a": ".-",
+    "b": "-...", "c": "-.-.", "d": "-..", "e": ".", "f": "..-.", "g": "--.",
+    "h": "....", "i": "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--",
+    "n": "-.", "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...",
+    "t": "-", "u": "..-", "v": "...-", "w": ".--", "x": "-..-", "y": "-.--",
+    "z": "--..", ".": ".-.-.-", ",": "--..--", "?": "..--..", "!": "-.-.--",
+    "-": "-....-", "/": "-..-.", "@": ".--.-.", "(": "-.--.", ")": "-.--.-"
+}
 WORDS = ["code", "bit", "list", "soul", "next"]
-COUNT = 0
+
+answers = []
+count = 0
 
 
-def morse_encode(word):
+def morse_encode(word, morse_encode_dict):
     """Перевод слова в код морзе"""
-    cods_dictionary = {
-        "0": "-----", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
-        "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.", "a": ".-",
-        "b": "-...", "c": "-.-.", "d": "-..", "e": ".", "f": "..-.", "g": "--.",
-        "h": "....", "i": "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--",
-        "n": "-.", "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...",
-        "t": "-", "u": "..-", "v": "...-", "w": ".--", "x": "-..-", "y": "-.--",
-        "z": "--..", ".": ".-.-.-", ",": "--..--", "?": "..--..", "!": "-.-.--",
-        "-": "-....-", "/": "-..-.", "@": ".--.-.", "(": "-.--.", ")": "-.--.-"
-    }
-
     encoded = []
 
     for char in word:
-        if char in cods_dictionary:
-            encoded.append(cods_dictionary[char])
+        if char in morse_encode_dict:
+            encoded.append(morse_encode_dict[char])
 
     return ' '.join(encoded)
 
@@ -50,14 +50,14 @@ def print_statistics(answers_list):
 def question():
     """Вывод вопроса и получение ответа"""
     word = get_word(WORDS)
-    print(f"Угадай что загадано -  {morse_encode(word)}")
+    print(f"Угадай что загадано -  {morse_encode(word, CODE_DICTIONARY)}")
     answer = input("Мой ответ: ")
     if answer == word:
         print("Ответ верный!!!")
-        ANSWERS.append(True)
+        answers.append(True)
     else:
         print(f"Вы ошиблись. Верный ответ: {word}")
-        ANSWERS.append(False)
+        answers.append(False)
 
 
 print("Сегодня мы потренируемся расшифровывать морзянку.")
@@ -65,11 +65,11 @@ print("Сегодня мы потренируемся расшифровыват
 start_command = input("Нажмите Enter и начнем")
 
 if start_command == "":
-    while COUNT < 5:
+    while count < 5:
         question()
-        COUNT += 1
+        count += 1
 
-    if COUNT == 5:
-        print_statistics(ANSWERS)
+    if count == 5:
+        print_statistics(answers)
 else:
     print("Упс. Что-то пошло не так.")
